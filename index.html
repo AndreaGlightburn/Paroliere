@@ -6,11 +6,11 @@
 <meta name="theme-color" content="#1a3a7a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Ghigliottina">
-<title>Ghigliottina Mente</title>
-<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a3a7a' width='100' height='100' rx='20'/><text x='50' y='72' font-size='60' font-family='serif' font-weight='bold' text-anchor='middle' fill='%23e5b84a'>G</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a3a7a' width='100' height='100' rx='20'/><text x='50' y='72' font-size='60' font-family='serif' font-weight='bold' text-anchor='middle' fill='%23e5b84a'>G</text></svg>">
-<link rel="manifest" href='data:application/manifest+json;charset=utf-8,{"name":"Ghigliottina Mente","short_name":"Ghigliottina","start_url":".","scope":".","display":"standalone","orientation":"portrait","background_color":"%23f5f3ee","theme_color":"%231a3a7a","icons":[{"src":"data:image/svg%2Bxml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect fill=%27%231a3a7a%27 width=%27100%27 height=%27100%27 rx=%2720%27/><text x=%2750%27 y=%2772%27 font-size=%2760%27 font-family=%27serif%27 font-weight=%27bold%27 text-anchor=%27middle%27 fill=%27%23e5b84a%27>G</text></svg>","sizes":"any","type":"image/svg+xml"}]}'>
+<meta name="apple-mobile-web-app-title" content="Paroliere">
+<title>Paroliere</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a3a7a' width='100' height='100' rx='20'/><text x='50' y='72' font-size='60' font-family='serif' font-weight='bold' text-anchor='middle' fill='%23e5b84a'>P</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a3a7a' width='100' height='100' rx='20'/><text x='50' y='72' font-size='60' font-family='serif' font-weight='bold' text-anchor='middle' fill='%23e5b84a'>P</text></svg>">
+<link rel="manifest" href='data:application/manifest+json;charset=utf-8,{"name":"Paroliere","short_name":"Paroliere","start_url":".","scope":".","display":"standalone","orientation":"portrait","background_color":"%23f5f3ee","theme_color":"%231a3a7a","icons":[{"src":"data:image/svg%2Bxml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect fill=%27%231a3a7a%27 width=%27100%27 height=%27100%27 rx=%2720%27/><text x=%2750%27 y=%2772%27 font-size=%2760%27 font-family=%27serif%27 font-weight=%27bold%27 text-anchor=%27middle%27 fill=%27%23e5b84a%27>P</text></svg>","sizes":"any","type":"image/svg+xml"}]}'>
 <style>
 :root {
   --bg: #f5f3ee;
@@ -76,340 +76,113 @@ body {
 }
 .screen { display: none; flex: 1; flex-direction: column; padding: 16px; }
 .screen.active { display: flex; }
-
-/* ===== HOME ===== */
-.hero {
-  text-align: center;
-  padding: 32px 16px 24px;
-}
-.hero h1 {
-  font-family: Georgia, serif;
-  font-size: 32px;
-  margin: 0 0 4px;
-  color: var(--primary);
-  letter-spacing: -0.5px;
-}
-.hero p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 14px;
-}
-.mode-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
-.mode-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 18px 20px;
-  text-align: left;
-  cursor: pointer;
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  color: inherit;
-  font: inherit;
-  width: 100%;
-  box-shadow: var(--shadow);
-  transition: transform 0.1s ease, border-color 0.15s;
-}
+.hero { text-align: center; padding: 24px 16px 16px; }
+.hero h1 { font-family: Georgia, serif; font-size: 30px; margin: 0 0 4px; color: var(--primary); letter-spacing: -0.5px; }
+.hero p { margin: 0; color: var(--text-muted); font-size: 13px; }
+.difficulty-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 10px 14px; margin-bottom: 14px; box-shadow: var(--shadow); }
+.diff-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.diff-row + .diff-row { border-top: 1px solid var(--border); }
+.diff-row > label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; flex: 0 0 72px; font-weight: 500; }
+.diff-chips { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; justify-content: flex-end; }
+.diff-chip { background: transparent; border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; font: inherit; font-size: 12px; color: var(--text-muted); cursor: pointer; min-width: 36px; }
+.diff-chip:active { transform: scale(0.95); }
+.diff-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); font-weight: 500; }
+.mode-grid { display: flex; flex-direction: column; gap: 10px; }
+.mode-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; text-align: left; cursor: pointer; display: flex; gap: 14px; align-items: flex-start; color: inherit; font: inherit; width: 100%; box-shadow: var(--shadow); transition: transform 0.1s ease, border-color 0.15s; }
 .mode-card:active { transform: scale(0.98); }
 .mode-card:hover { border-color: var(--primary); }
-.mode-icon {
-  width: 44px; height: 44px; flex-shrink: 0;
-  background: var(--primary);
-  color: var(--accent);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; font-weight: bold; font-family: Georgia, serif;
-}
-.mode-card h3 { margin: 0 0 4px; font-size: 17px; font-weight: 600; }
-.mode-card p { margin: 0; font-size: 13px; color: var(--text-muted); line-height: 1.4; }
-
-.footer-bar {
-  display: flex;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: 20px;
-}
-.footer-bar button {
-  flex: 1;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 10px;
-  font: inherit;
-  font-size: 13px;
-  color: var(--text-muted);
-  cursor: pointer;
-}
+.mode-icon { width: 42px; height: 42px; flex-shrink: 0; background: var(--primary); color: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; font-family: Georgia, serif; }
+.mode-card h3 { margin: 0 0 3px; font-size: 16px; font-weight: 600; }
+.mode-card p { margin: 0; font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+.footer-bar { display: flex; gap: 8px; margin-top: auto; padding-top: 16px; }
+.footer-bar button { flex: 1; background: transparent; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; font: inherit; font-size: 13px; color: var(--text-muted); cursor: pointer; }
 .footer-bar button:active { background: var(--surface-alt); }
-
-/* ===== GAME ===== */
-.top-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 4px 0 16px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 16px;
-}
-.back-btn {
-  background: transparent;
-  border: none;
-  font: inherit;
-  font-size: 22px;
-  cursor: pointer;
-  padding: 4px 10px;
-  color: var(--text);
-  border-radius: var(--radius);
-}
+.top-bar { display: flex; align-items: center; gap: 10px; padding: 4px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.back-btn { background: transparent; border: none; font: inherit; font-size: 22px; cursor: pointer; padding: 4px 10px; color: var(--text); border-radius: var(--radius); }
 .back-btn:active { background: var(--surface-alt); }
-.mode-label {
-  flex: 1;
-  font-size: 13px;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-}
-.score-chip {
-  background: var(--accent);
-  color: var(--primary-dark);
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 14px;
-}
-.score-chip.lives { background: var(--surface-alt); color: var(--text); font-size: 16px; letter-spacing: 2px; }
-
-/* clues */
-.clues {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.clue {
-  background: var(--primary);
-  color: #fff;
-  border-radius: 999px;
-  padding: 14px 20px;
-  text-align: center;
-  font-weight: 700;
-  font-size: 17px;
-  letter-spacing: 1.5px;
-  box-shadow: var(--shadow);
-  transition: opacity 0.3s;
-  position: relative;
-}
+.mode-label { flex: 1; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+.score-chip { background: var(--accent); color: var(--primary-dark); padding: 6px 14px; border-radius: 999px; font-weight: 600; font-size: 14px; }
+.clues { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.clue { background: var(--primary); color: #fff; border-radius: 999px; padding: 14px 20px; text-align: center; font-weight: 700; font-size: 17px; letter-spacing: 1.5px; box-shadow: var(--shadow); transition: opacity 0.3s; position: relative; }
 .clue.hidden-clue { background: var(--surface-alt); color: var(--text-light); font-style: italic; letter-spacing: 1px; }
-
-/* hidden word (trattini mode) */
-.hidden-word {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin: 10px 0 20px;
-  flex-wrap: wrap;
-}
-.letter-slot {
-  width: 32px; height: 44px;
-  border-bottom: 3px solid var(--primary);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; font-weight: 700;
-  color: var(--primary);
-  font-family: Georgia, serif;
-}
+.hidden-word { display: flex; justify-content: center; gap: 6px; margin: 10px 0 20px; flex-wrap: wrap; }
+.letter-slot { width: 30px; height: 42px; border-bottom: 3px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: var(--primary); font-family: Georgia, serif; }
 .letter-slot.revealed { color: var(--accent-dark); }
-
-/* multiple choice */
-.choices {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.choice {
-  background: var(--surface);
-  border: 2px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px 10px;
-  font: inherit;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  color: var(--text);
-  text-align: center;
-}
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.choice { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 14px 10px; font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; color: var(--text); text-align: center; }
 .choice:active { transform: scale(0.97); }
 .choice.correct { background: var(--success-bg); border-color: var(--success); color: var(--success); }
 .choice.wrong { background: var(--danger-bg); border-color: var(--danger); color: var(--danger); }
 .choice:disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* input */
-.input-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.input-row input {
-  flex: 1;
-  padding: 14px 16px;
-  font: inherit;
-  font-size: 17px;
-  border: 2px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  color: var(--text);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-align: center;
-  font-weight: 600;
-  outline: none;
-  min-width: 0;
-}
+.input-row { display: flex; gap: 8px; margin-bottom: 10px; }
+.input-row input { flex: 1; padding: 14px 16px; font: inherit; font-size: 17px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); text-transform: uppercase; letter-spacing: 2px; text-align: center; font-weight: 600; outline: none; min-width: 0; }
 .input-row input:focus { border-color: var(--primary); }
-.btn {
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius);
-  padding: 14px 20px;
-  font: inherit;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  white-space: nowrap;
-}
+.btn { background: var(--primary); color: #fff; border: none; border-radius: var(--radius); padding: 14px 20px; font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; white-space: nowrap; }
 .btn:active { transform: scale(0.97); background: var(--primary-dark); }
 .btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
 .btn.secondary:active { background: var(--surface-alt); }
 .btn.accent { background: var(--accent); color: var(--primary-dark); }
 .btn.full { width: 100%; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
 .action-row { display: flex; gap: 8px; margin-top: 6px; }
 .action-row .btn { flex: 1; font-size: 14px; padding: 12px; }
-
-.msg {
-  min-height: 20px;
-  text-align: center;
-  font-size: 14px;
-  padding: 4px 0 10px;
-  color: var(--text-muted);
-}
+.msg { min-height: 20px; text-align: center; font-size: 14px; padding: 4px 0 10px; color: var(--text-muted); }
 .msg.error { color: var(--danger); }
 .msg.success { color: var(--success); }
-
-/* result overlay */
-.result-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  margin: 16px 0;
-  text-align: center;
-  box-shadow: var(--shadow);
-}
+.result-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin: 16px 0; text-align: center; box-shadow: var(--shadow); }
 .result-card.win { border-color: var(--success); background: var(--success-bg); }
 .result-card.lose { border-color: var(--danger); background: var(--danger-bg); }
 .result-card h2 { margin: 0 0 6px; font-size: 20px; }
 .result-card .target { font-size: 28px; font-weight: 700; color: var(--primary); letter-spacing: 2px; margin: 8px 0; font-family: Georgia, serif; }
 .result-card.win .target { color: var(--success); }
 .result-card .pts { font-size: 15px; color: var(--text-muted); }
-
-/* stats */
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 16px 0;
-}
-.stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  text-align: center;
-}
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; text-align: center; }
 .stat-card .label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 .stat-card .value { font-size: 24px; font-weight: 700; color: var(--primary); margin-top: 4px; }
 .stat-section { margin-bottom: 20px; }
 .stat-section h3 { font-size: 15px; margin: 0 0 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
-
-/* settings */
-.setting-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  margin-bottom: 10px;
-}
+.setting-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; }
 .setting-item h4 { margin: 0 0 4px; font-size: 15px; }
 .setting-item p { margin: 0 0 10px; font-size: 13px; color: var(--text-muted); }
-textarea.custom-input {
-  width: 100%;
-  min-height: 100px;
-  padding: 10px;
-  font-family: ui-monospace, SFMono-Regular, Menonaco, monospace;
-  font-size: 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg);
-  color: var(--text);
-  resize: vertical;
-}
-
-/* animations */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
-}
+.setting-item code { font-size: 11px; background: var(--surface-alt); padding: 1px 4px; border-radius: 3px; }
+textarea.custom-input { width: 100%; min-height: 90px; padding: 10px; font-family: ui-monospace, SFMono-Regular, Monaco, monospace; font-size: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); resize: vertical; box-sizing: border-box; }
+.file-input-wrapper { position: relative; display: block; margin-bottom: 8px; }
+.file-input-wrapper input[type=file] { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; top: 0; left: 0; }
+.file-input-label { display: block; padding: 12px; text-align: center; background: var(--surface-alt); border: 1px dashed var(--border); border-radius: 8px; font-size: 13px; color: var(--text-muted); cursor: pointer; }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 12px; }
+.modal { background: var(--surface); border-radius: var(--radius-lg); padding: 16px; max-width: 440px; width: 100%; max-height: 92vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.modal h3 { margin: 0 0 8px; font-size: 17px; }
+.modal p { margin: 0 0 10px; font-size: 13px; color: var(--text-muted); }
+.modal textarea { width: 100%; min-height: 240px; font-family: ui-monospace, SFMono-Regular, Monaco, monospace; font-size: 11px; padding: 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); resize: vertical; box-sizing: border-box; line-height: 1.5; }
+.modal-actions { display: flex; gap: 8px; margin-top: 10px; }
+.modal-actions .btn { flex: 1; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
 .shake { animation: shake 0.3s; }
-
-@keyframes pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
+@keyframes pop { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 .pop { animation: pop 0.25s ease-out; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.fade-in { animation: fadeIn 0.3s ease-out; }
 </style>
 </head>
 <body>
 <div id="app">
-
-  <!-- HOME -->
   <section class="screen active" id="home">
     <div class="hero">
-      <h1>Ghigliottina Mente</h1>
+      <h1>Paroliere</h1>
       <p>Allena la mente con le parole</p>
     </div>
+    <div class="difficulty-panel" id="difficultyPanel"></div>
     <div class="mode-grid">
       <button class="mode-card" onclick="startGame('classica')">
         <div class="mode-icon">G</div>
-        <div>
-          <h3>Classica</h3>
-          <p>5 indizi, trova la parola che li unisce tutti. Montepremi fino a 100.000 €.</p>
-        </div>
+        <div><h3>Classica</h3><p>5 indizi, trova la parola che li unisce. Montepremi fino a 100.000 €.</p></div>
       </button>
       <button class="mode-card" onclick="startGame('scelta')">
         <div class="mode-icon">6</div>
-        <div>
-          <h3>Scelta multipla</h3>
-          <p>Scegli la parola giusta tra 6 opzioni. Perfetta per iniziare.</p>
-        </div>
+        <div><h3>Scelta multipla</h3><p>Scegli la parola giusta tra più opzioni. Perfetta per iniziare.</p></div>
       </button>
       <button class="mode-card" onclick="startGame('trattini')">
         <div class="mode-icon">_</div>
-        <div>
-          <h3>A trattini</h3>
-          <p>Parola nascosta: a ogni errore una lettera appare, ma il punteggio dimezza.</p>
-        </div>
+        <div><h3>A trattini</h3><p>Parola nascosta: a ogni errore una lettera appare, ma il punteggio dimezza.</p></div>
       </button>
     </div>
     <div class="footer-bar">
@@ -418,7 +191,6 @@ textarea.custom-input {
     </div>
   </section>
 
-  <!-- GAME -->
   <section class="screen" id="game">
     <div class="top-bar">
       <button class="back-btn" onclick="confirmBack()">←</button>
@@ -428,7 +200,6 @@ textarea.custom-input {
     <div id="gameBody"></div>
   </section>
 
-  <!-- STATS -->
   <section class="screen" id="stats">
     <div class="top-bar">
       <button class="back-btn" onclick="show('home')">←</button>
@@ -438,42 +209,62 @@ textarea.custom-input {
     <button class="btn secondary full" onclick="resetStats()" style="margin-top:auto">Azzera statistiche</button>
   </section>
 
-  <!-- SETTINGS -->
   <section class="screen" id="settings">
     <div class="top-bar">
       <button class="back-btn" onclick="show('home')">←</button>
       <div class="mode-label">Impostazioni</div>
     </div>
     <div class="setting-item">
-      <h4>Enigmi personalizzati</h4>
-      <p>Aggiungi i tuoi enigmi in formato JSON. Esempio:<br><code style="font-size:11px">[{"target":"CASA","clues":["TETTO","PORTA","MURO","FAMIGLIA","DOLCE"]}]</code></p>
-      <textarea class="custom-input" id="customJson" placeholder='[{"target":"...","clues":["...","...","...","...","..."]}]'></textarea>
+      <h4>Carica enigmi</h4>
+      <p>Aggiungi i tuoi enigmi da file JSON o incollandoli. Formato: <code>[{"target":"CASA","clues":["TETTO","PORTA","MURO","FAMIGLIA","DOLCE"]}]</code></p>
+      <div class="file-input-wrapper">
+        <div class="file-input-label">📁 Carica file JSON...</div>
+        <input type="file" accept=".json,application/json" onchange="importFromFile(this)">
+      </div>
+      <textarea class="custom-input" id="customJson" placeholder='Oppure incolla qui il JSON...'></textarea>
       <div class="action-row">
-        <button class="btn" onclick="saveCustom()">Salva</button>
+        <button class="btn" onclick="saveCustom()">Salva paste</button>
         <button class="btn secondary" onclick="exportAll()">Esporta tutti</button>
       </div>
       <div class="msg" id="settingsMsg"></div>
     </div>
     <div class="setting-item">
+      <h4>Genera con AI</h4>
+      <p>Copia il prompt pronto per Claude, ChatGPT, Gemini o qualsiasi altra AI. Ti darà un JSON da scaricare e caricare qui.</p>
+      <button class="btn full" onclick="openAIPrompt()">Mostra prompt AI</button>
+    </div>
+    <div class="setting-item">
       <h4>Enigmi disponibili</h4>
       <p>Base: <span id="baseCount"></span> · Personalizzati: <span id="customCount"></span></p>
+      <button class="btn secondary full" onclick="clearCustom()" style="margin-top:4px">Rimuovi personalizzati</button>
     </div>
-    <div class="setting-item" style="font-size:12px;color:var(--text-muted)">
-      Ghigliottina Mente · PWA offline · <span id="versionTag">v1.0</span>
+    <div class="setting-item" style="font-size:12px;color:var(--text-muted);text-align:center">
+      Paroliere · PWA offline · v1.1
     </div>
   </section>
 
+  <div class="modal-backdrop" id="aiModal" style="display:none" onclick="if(event.target===this)closeAIPrompt()">
+    <div class="modal">
+      <h3>Prompt pronto per AI</h3>
+      <p>Copia tutto il testo qui sotto e incollalo in Claude, ChatGPT, Gemini o altre AI. Puoi modificare quanti enigmi vuoi.</p>
+      <textarea id="aiPromptText" readonly></textarea>
+      <div class="modal-actions">
+        <button class="btn" onclick="copyAIPrompt()">Copia prompt</button>
+        <button class="btn secondary" onclick="closeAIPrompt()">Chiudi</button>
+      </div>
+      <div class="msg" id="aiModalMsg"></div>
+    </div>
+  </div>
 </div>
 
 <script>
-// ============== PUZZLES ==============
 const BASE_PUZZLES = [
   { target: "ROSSO", clues: ["VINO","POMODORO","SEMAFORO","PESCE","MARE"] },
   { target: "NERO", clues: ["MERCATO","UMORE","PEPE","CRONACA","LISTA"] },
   { target: "BIANCO", clues: ["PANE","FOGLIO","MATRIMONIO","ABITO","SETTIMANA"] },
   { target: "FORTE", clues: ["MANO","CAFFÈ","VOCE","VENTO","PUNTO"] },
   { target: "APERTO", clues: ["MARE","CUORE","CIELO","DIALOGO","DISCORSO"] },
-  { target: "DOLCE", clues: ["VITA","CASA","VINO","META","FAR NIENTE"] },
+  { target: "DOLCE", clues: ["VITA","CASA","VINO","META","ATTESA"] },
   { target: "PIENO", clues: ["GIORNO","LUNA","TITOLO","SUCCESSO","VOTO"] },
   { target: "ORO", clues: ["MEDAGLIA","ETÀ","ANELLO","CUORE","MINIERA"] },
   { target: "FERRO", clues: ["ETÀ","PUGNO","CAVALLO","STIRO","DONNA"] },
@@ -536,24 +327,84 @@ const BASE_PUZZLES = [
   { target: "PRIMA", clues: ["VISTA","DONNA","TEATRALE","CLASSE","COLAZIONE"] }
 ];
 
-// ============== STATE ==============
+const SETTINGS_KEY = "paroliere.settings.v1";
+const DEFAULT_SETTINGS = { length: "any", attempts: "auto", options: "6" };
+let settings = { ...DEFAULT_SETTINGS };
+
+function loadSettings() {
+  try {
+    const s = JSON.parse(localStorage.getItem(SETTINGS_KEY));
+    if (s) settings = { ...DEFAULT_SETTINGS, ...s };
+  } catch(e) {}
+}
+function saveSettings() { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
+function setSetting(key, val) { settings[key] = val; saveSettings(); renderDifficulty(); }
+
+const DIFF_OPTIONS = {
+  length: [
+    { val: "easy", label: "Facile", sub: "3-5" },
+    { val: "medium", label: "Media", sub: "6-8" },
+    { val: "hard", label: "Difficile", sub: "9+" },
+    { val: "any", label: "Qualsiasi", sub: "" }
+  ],
+  attempts: [
+    { val: "3", label: "3" },
+    { val: "5", label: "5" },
+    { val: "7", label: "7" },
+    { val: "auto", label: "Auto" }
+  ],
+  options: [
+    { val: "4", label: "4" },
+    { val: "6", label: "6" },
+    { val: "8", label: "8" }
+  ]
+};
+
+function renderDifficulty() {
+  const panel = document.getElementById("difficultyPanel");
+  if (!panel) return;
+  const rows = [
+    { key: "length", label: "Lunghezza" },
+    { key: "attempts", label: "Tentativi" },
+    { key: "options", label: "Opzioni" }
+  ];
+  panel.innerHTML = rows.map(r => {
+    const chips = DIFF_OPTIONS[r.key].map(o => {
+      const active = settings[r.key] === o.val ? " active" : "";
+      const sub = o.sub ? ` <span style="opacity:0.7;font-size:10px">${o.sub}</span>` : "";
+      return `<button class="diff-chip${active}" onclick="setSetting('${r.key}','${o.val}')">${o.label}${sub}</button>`;
+    }).join("");
+    return `<div class="diff-row"><label>${r.label}</label><div class="diff-chips">${chips}</div></div>`;
+  }).join("");
+}
+
 const MODE_NAMES = { classica: "Classica", scelta: "Scelta multipla", trattini: "A trattini" };
 const MODE_START_SCORE = { classica: 100000, scelta: 100, trattini: 1000 };
+const LENGTH_RANGES = { easy: [3,5], medium: [6,8], hard: [9,99], any: [1,99] };
 
 let state = {};
 let CUSTOM = [];
 
 function allPuzzles() { return [...BASE_PUZZLES, ...CUSTOM]; }
 
-// ============== HELPERS ==============
+function filteredPool() {
+  const [min, max] = LENGTH_RANGES[settings.length] || LENGTH_RANGES.any;
+  const letters = s => s.replace(/[^a-zA-ZÀ-ÿ]/g, "").length;
+  const pool = allPuzzles();
+  const filtered = pool.filter(p => {
+    const n = letters(p.target);
+    return n >= min && n <= max;
+  });
+  return filtered.length ? filtered : pool;
+}
+
 function normalize(s) {
   return (s || "").toString().trim().toLowerCase()
     .normalize("NFD").replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9]/g, "");
 }
 function pickRandom(arr, n) {
-  const copy = [...arr];
-  const out = [];
+  const copy = [...arr]; const out = [];
   while (out.length < n && copy.length) {
     const i = Math.floor(Math.random() * copy.length);
     out.push(copy.splice(i, 1)[0]);
@@ -572,10 +423,10 @@ function fmtScore(n, mode) {
   return n + " pt";
 }
 
-// ============== NAV ==============
 function show(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
+  if (id === "home") renderDifficulty();
   if (id === "stats") renderStats();
   if (id === "settings") renderSettings();
   window.scrollTo(0, 0);
@@ -587,20 +438,15 @@ function confirmBack() {
   show("home");
 }
 
-// ============== GAME START ==============
 function startGame(mode) {
-  const pool = allPuzzles();
-  if (!pool.length) { alert("Nessun enigma disponibile."); return; }
+  const pool = filteredPool();
+  if (!pool.length) { alert("Nessun enigma disponibile per questa difficoltà."); return; }
   const puzzle = pool[Math.floor(Math.random() * pool.length)];
   state = {
-    mode,
-    puzzle,
+    mode, puzzle,
     score: MODE_START_SCORE[mode],
-    errors: 0,
-    revealed: [],
-    hiddenClues: [],
-    ended: false,
-    inProgress: true
+    errors: 0, revealed: [], hiddenClues: [],
+    ended: false, inProgress: true
   };
   document.getElementById("modeLabel").textContent = MODE_NAMES[mode];
   updateScore();
@@ -610,16 +456,10 @@ function startGame(mode) {
 
 function updateScore() {
   const chip = document.getElementById("scoreChip");
-  if (state.mode === "scelta") {
-    chip.className = "score-chip";
-    chip.textContent = state.score + " pt";
-  } else {
-    chip.className = "score-chip";
-    chip.textContent = fmtScore(state.score, state.mode);
-  }
+  chip.className = "score-chip";
+  chip.textContent = fmtScore(state.score, state.mode);
 }
 
-// ============== RENDER PER MODE ==============
 function renderGame() {
   const body = document.getElementById("gameBody");
   body.innerHTML = "";
@@ -628,7 +468,6 @@ function renderGame() {
   else if (state.mode === "trattini") renderTrattini(body);
 }
 
-// --- CLASSICA ---
 function renderClassica(body) {
   const cluesDiv = document.createElement("div");
   cluesDiv.className = "clues";
@@ -640,28 +479,17 @@ function renderClassica(body) {
     cluesDiv.appendChild(d);
   });
   body.appendChild(cluesDiv);
-
   const inputRow = document.createElement("div");
   inputRow.className = "input-row";
-  inputRow.innerHTML = `
-    <input type="text" id="answer" placeholder="La tua parola" autocomplete="off" autocapitalize="characters" />
-    <button class="btn accent" onclick="submitClassica()">Invia</button>
-  `;
+  inputRow.innerHTML = `<input type="text" id="answer" placeholder="La tua parola" autocomplete="off" autocapitalize="characters" /><button class="btn accent" onclick="submitClassica()">Invia</button>`;
   body.appendChild(inputRow);
-
   const msg = document.createElement("div");
-  msg.className = "msg";
-  msg.id = "gameMsg";
+  msg.className = "msg"; msg.id = "gameMsg";
   body.appendChild(msg);
-
   const actions = document.createElement("div");
   actions.className = "action-row";
-  actions.innerHTML = `
-    <button class="btn secondary" onclick="hintClassica()" id="hintBtn">Dimezza (–50%)</button>
-    <button class="btn secondary" onclick="giveUp()">Mi arrendo</button>
-  `;
+  actions.innerHTML = `<button class="btn secondary" onclick="hintClassica()">Dimezza (–50%)</button><button class="btn secondary" onclick="giveUp()">Mi arrendo</button>`;
   body.appendChild(actions);
-
   const inp = document.getElementById("answer");
   inp.focus();
   inp.addEventListener("keydown", e => { if (e.key === "Enter") submitClassica(); });
@@ -682,8 +510,7 @@ function submitClassica() {
     msg.className = "msg error";
     inp.classList.add("shake");
     setTimeout(() => inp.classList.remove("shake"), 300);
-    inp.value = "";
-    inp.focus();
+    inp.value = ""; inp.focus();
     if (state.score < 100) endGame(false);
   }
 }
@@ -712,7 +539,6 @@ function giveUp() {
   }
 }
 
-// --- SCELTA MULTIPLA ---
 function renderScelta(body) {
   const cluesDiv = document.createElement("div");
   cluesDiv.className = "clues";
@@ -723,16 +549,16 @@ function renderScelta(body) {
     cluesDiv.appendChild(d);
   });
   body.appendChild(cluesDiv);
-
   if (!state.options) {
+    const nOpts = parseInt(settings.options) || 6;
     const others = allPuzzles()
       .filter(p => normalize(p.target) !== normalize(state.puzzle.target))
       .map(p => p.target);
-    const distractors = pickRandom(others, 5);
+    const distractors = pickRandom(others, nOpts - 1);
     state.options = shuffleInPlace([state.puzzle.target, ...distractors]);
     state.disabled = [];
+    state.maxErrors = Math.max(2, Math.floor(nOpts / 2));
   }
-
   const choicesDiv = document.createElement("div");
   choicesDiv.className = "choices";
   state.options.forEach((opt, i) => {
@@ -745,10 +571,10 @@ function renderScelta(body) {
     choicesDiv.appendChild(b);
   });
   body.appendChild(choicesDiv);
-
   const msg = document.createElement("div");
-  msg.className = "msg";
-  msg.id = "gameMsg";
+  msg.className = "msg"; msg.id = "gameMsg";
+  const left = state.maxErrors - state.disabled.length;
+  msg.textContent = `Errori rimasti: ${left}`;
   body.appendChild(msg);
 }
 
@@ -761,15 +587,15 @@ function chooseOption(i) {
     state.disabled.push(i);
     state.score = Math.max(0, state.score - 20);
     updateScore();
-    const msg = document.getElementById("gameMsg");
-    msg.textContent = `"${opt}" non è la parola. –20 pt.`;
-    msg.className = "msg error";
     renderGame();
-    if (state.disabled.length >= 3) endGame(false);
+    const msg = document.getElementById("gameMsg");
+    const left = state.maxErrors - state.disabled.length;
+    msg.textContent = `"${opt}" non è la parola. –20 pt. Errori rimasti: ${left}`;
+    msg.className = "msg error";
+    if (state.disabled.length >= state.maxErrors) endGame(false);
   }
 }
 
-// --- TRATTINI ---
 function renderTrattini(body) {
   const cluesDiv = document.createElement("div");
   cluesDiv.className = "clues";
@@ -780,17 +606,19 @@ function renderTrattini(body) {
     cluesDiv.appendChild(d);
   });
   body.appendChild(cluesDiv);
-
   const target = state.puzzle.target;
   if (!state.revealed.length) {
     state.revealed = new Array(target.length).fill(false);
-    // reveal spaces/non-letters automatically
     for (let i = 0; i < target.length; i++) {
       if (!/[a-zA-ZÀ-ÿ]/.test(target[i])) state.revealed[i] = true;
     }
-    state.maxErrors = Math.max(1, Math.floor(target.replace(/[^a-zA-ZÀ-ÿ]/g, "").length * 0.7));
+    const letterCount = target.replace(/[^a-zA-ZÀ-ÿ]/g, "").length;
+    if (settings.attempts === "auto") {
+      state.maxErrors = Math.max(2, Math.floor(letterCount * 0.7));
+    } else {
+      state.maxErrors = Math.max(1, Math.min(parseInt(settings.attempts), letterCount - 1));
+    }
   }
-
   const wordDiv = document.createElement("div");
   wordDiv.className = "hidden-word";
   for (let i = 0; i < target.length; i++) {
@@ -801,28 +629,19 @@ function renderTrattini(body) {
     wordDiv.appendChild(slot);
   }
   body.appendChild(wordDiv);
-
   const inputRow = document.createElement("div");
   inputRow.className = "input-row";
-  inputRow.innerHTML = `
-    <input type="text" id="answer" placeholder="La tua parola" autocomplete="off" autocapitalize="characters" />
-    <button class="btn accent" onclick="submitTrattini()">Invia</button>
-  `;
+  inputRow.innerHTML = `<input type="text" id="answer" placeholder="La tua parola" autocomplete="off" autocapitalize="characters" /><button class="btn accent" onclick="submitTrattini()">Invia</button>`;
   body.appendChild(inputRow);
-
   const msg = document.createElement("div");
-  msg.className = "msg";
-  msg.id = "gameMsg";
+  msg.className = "msg"; msg.id = "gameMsg";
   const left = state.maxErrors - state.errors;
   msg.textContent = `Errori rimasti: ${left}`;
-  msg.className = "msg";
   body.appendChild(msg);
-
   const actions = document.createElement("div");
   actions.className = "action-row";
   actions.innerHTML = `<button class="btn secondary" onclick="giveUp()">Mi arrendo</button>`;
   body.appendChild(actions);
-
   const inp = document.getElementById("answer");
   inp.focus();
   inp.addEventListener("keydown", e => { if (e.key === "Enter") submitTrattini(); });
@@ -843,7 +662,6 @@ function submitTrattini() {
   } else {
     state.errors++;
     state.score = Math.max(0, Math.round(state.score / 2));
-    // reveal a random hidden letter
     const hidden = state.revealed.map((r, i) => r ? -1 : i).filter(i => i >= 0);
     if (hidden.length > 1) {
       const idx = hidden[Math.floor(Math.random() * hidden.length)];
@@ -859,7 +677,6 @@ function submitTrattini() {
   }
 }
 
-// ============== END ==============
 function endGame(won) {
   state.ended = true;
   state.inProgress = false;
@@ -868,13 +685,8 @@ function endGame(won) {
   body.innerHTML = "";
   const card = document.createElement("div");
   card.className = "result-card " + (won ? "win" : "lose") + " pop";
-  card.innerHTML = `
-    <h2>${won ? "Esatto!" : "Peccato"}</h2>
-    <div class="target">${state.puzzle.target}</div>
-    <div class="pts">${won ? "Hai vinto " + fmtScore(state.score, state.mode) : "La parola era questa"}</div>
-  `;
+  card.innerHTML = `<h2>${won ? "Esatto!" : "Peccato"}</h2><div class="target">${state.puzzle.target}</div><div class="pts">${won ? "Hai vinto " + fmtScore(state.score, state.mode) : "La parola era questa"}</div>`;
   body.appendChild(card);
-
   const cluesDiv = document.createElement("div");
   cluesDiv.className = "clues";
   state.puzzle.clues.forEach(c => {
@@ -886,19 +698,14 @@ function endGame(won) {
     cluesDiv.appendChild(d);
   });
   body.appendChild(cluesDiv);
-
   const actions = document.createElement("div");
   actions.className = "action-row";
-  actions.innerHTML = `
-    <button class="btn" onclick="startGame('${state.mode}')">Nuova parola</button>
-    <button class="btn secondary" onclick="show('home')">Home</button>
-  `;
+  actions.innerHTML = `<button class="btn" onclick="startGame('${state.mode}')">Nuova parola</button><button class="btn secondary" onclick="show('home')">Home</button>`;
   body.appendChild(actions);
   updateScore();
 }
 
-// ============== STATS ==============
-const STATS_KEY = "ghigliottina.stats.v1";
+const STATS_KEY = "paroliere.stats.v1";
 function loadStats() {
   try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; }
   catch(e) { return {}; }
@@ -928,30 +735,13 @@ function renderStats() {
     const sec = document.createElement("div");
     sec.className = "stat-section";
     const rate = d.played ? Math.round(100 * d.won / d.played) : 0;
-    sec.innerHTML = `
-      <h3>${MODE_NAMES[m]}</h3>
-      <div class="stats-grid">
-        <div class="stat-card"><div class="label">Partite</div><div class="value">${d.played}</div></div>
-        <div class="stat-card"><div class="label">Vittorie</div><div class="value">${d.won}</div></div>
-        <div class="stat-card"><div class="label">% Successo</div><div class="value">${rate}%</div></div>
-        <div class="stat-card"><div class="label">Record</div><div class="value" style="font-size:17px">${fmtScore(d.best, m)}</div></div>
-      </div>
-    `;
+    sec.innerHTML = `<h3>${MODE_NAMES[m]}</h3><div class="stats-grid"><div class="stat-card"><div class="label">Partite</div><div class="value">${d.played}</div></div><div class="stat-card"><div class="label">Vittorie</div><div class="value">${d.won}</div></div><div class="stat-card"><div class="label">% Successo</div><div class="value">${rate}%</div></div><div class="stat-card"><div class="label">Record</div><div class="value" style="font-size:17px">${fmtScore(d.best, m)}</div></div></div>`;
     body.appendChild(sec);
   });
   const overall = document.createElement("div");
   overall.className = "stat-section";
   const overallRate = totPlayed ? Math.round(100 * totWon / totPlayed) : 0;
-  overall.innerHTML = `
-    <h3>Totale</h3>
-    <div class="stats-grid">
-      <div class="stat-card"><div class="label">Giocate</div><div class="value">${totPlayed}</div></div>
-      <div class="stat-card"><div class="label">Vinte</div><div class="value">${totWon}</div></div>
-    </div>
-    <p style="text-align:center;color:var(--text-muted);margin-top:10px;font-size:14px">
-      Vittorie complessive: <b>${overallRate}%</b>
-    </p>
-  `;
+  overall.innerHTML = `<h3>Totale</h3><div class="stats-grid"><div class="stat-card"><div class="label">Giocate</div><div class="value">${totPlayed}</div></div><div class="stat-card"><div class="label">Vinte</div><div class="value">${totWon}</div></div></div><p style="text-align:center;color:var(--text-muted);margin-top:10px;font-size:14px">Vittorie complessive: <b>${overallRate}%</b></p>`;
   body.appendChild(overall);
 }
 function resetStats() {
@@ -961,55 +751,161 @@ function resetStats() {
   }
 }
 
-// ============== CUSTOM PUZZLES ==============
-const CUSTOM_KEY = "ghigliottina.custom.v1";
+const CUSTOM_KEY = "paroliere.custom.v1";
 function loadCustom() {
   try { CUSTOM = JSON.parse(localStorage.getItem(CUSTOM_KEY)) || []; }
   catch(e) { CUSTOM = []; }
 }
 function saveCustomList() { localStorage.setItem(CUSTOM_KEY, JSON.stringify(CUSTOM)); }
+
+function validateAndAdd(text) {
+  const parsed = JSON.parse(text);
+  if (!Array.isArray(parsed)) throw new Error("Deve essere un array JSON");
+  const valid = parsed.filter(p =>
+    p && typeof p.target === "string" &&
+    Array.isArray(p.clues) && p.clues.length === 5 &&
+    p.clues.every(c => typeof c === "string" && c.trim().length > 0)
+  );
+  if (!valid.length) throw new Error("Nessun enigma valido trovato");
+  valid.forEach(p => {
+    p.target = p.target.trim().toUpperCase();
+    p.clues = p.clues.map(c => c.trim().toUpperCase());
+  });
+  CUSTOM = [...CUSTOM, ...valid];
+  saveCustomList();
+  return valid.length;
+}
+
 function saveCustom() {
   const msg = document.getElementById("settingsMsg");
   const txt = document.getElementById("customJson").value.trim();
   if (!txt) { msg.textContent = "Incolla il JSON prima"; msg.className = "msg error"; return; }
   try {
-    const parsed = JSON.parse(txt);
-    if (!Array.isArray(parsed)) throw new Error("deve essere un array");
-    const valid = parsed.filter(p =>
-      p && typeof p.target === "string" &&
-      Array.isArray(p.clues) && p.clues.length === 5 &&
-      p.clues.every(c => typeof c === "string")
-    );
-    if (!valid.length) throw new Error("nessun enigma valido");
-    CUSTOM = [...CUSTOM, ...valid];
-    saveCustomList();
+    const n = validateAndAdd(txt);
     document.getElementById("customJson").value = "";
-    msg.textContent = `Aggiunti ${valid.length} enigmi. Totale personalizzati: ${CUSTOM.length}`;
+    msg.textContent = `Aggiunti ${n} enigmi. Totale personalizzati: ${CUSTOM.length}`;
     msg.className = "msg success";
     renderSettings();
   } catch (e) {
-    msg.textContent = "JSON non valido: " + e.message;
+    msg.textContent = "Errore: " + e.message;
     msg.className = "msg error";
   }
 }
+
+function importFromFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const msg = document.getElementById("settingsMsg");
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const n = validateAndAdd(e.target.result);
+      msg.textContent = `Caricati ${n} enigmi da ${file.name}. Totale: ${CUSTOM.length}`;
+      msg.className = "msg success";
+      renderSettings();
+    } catch (err) {
+      msg.textContent = "Errore nel file: " + err.message;
+      msg.className = "msg error";
+    }
+    input.value = "";
+  };
+  reader.onerror = () => {
+    msg.textContent = "Impossibile leggere il file";
+    msg.className = "msg error";
+    input.value = "";
+  };
+  reader.readAsText(file);
+}
+
+function clearCustom() {
+  if (!CUSTOM.length) return;
+  if (confirm(`Rimuovere tutti i ${CUSTOM.length} enigmi personalizzati?`)) {
+    CUSTOM = [];
+    saveCustomList();
+    renderSettings();
+  }
+}
+
 function exportAll() {
   const blob = new Blob([JSON.stringify(allPuzzles(), null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "ghigliottina-enigmi.json";
+  a.download = "paroliere-enigmi.json";
   a.click();
   URL.revokeObjectURL(url);
 }
+
 function renderSettings() {
   document.getElementById("baseCount").textContent = BASE_PUZZLES.length;
   document.getElementById("customCount").textContent = CUSTOM.length;
 }
 
-// ============== SERVICE WORKER (offline) ==============
+const AI_PROMPT = `Sei un generatore di enigmi per il gioco "La Ghigliottina" de L'Eredità (RAI).
+
+Genera **30** nuovi enigmi in italiano in formato JSON secondo questo schema esatto:
+
+[
+  {"target": "PAROLA", "clues": ["INDIZIO1","INDIZIO2","INDIZIO3","INDIZIO4","INDIZIO5"]}
+]
+
+REGOLE RIGIDE:
+1. "target" è la parola da indovinare, in MAIUSCOLO, una sola parola.
+2. "clues" sono esattamente 5 indizi, in MAIUSCOLO, ciascuno UNA sola parola.
+3. OGNI indizio deve formare con il target una collocazione, un composto o un modo di dire COMUNE in italiano. Esempi: AMORE folle, CORSA folle, SPESE folli, VELOCITÀ folle, IDEA folle → target = FOLLE.
+4. L'ordine può essere <indizio> <target> (es. "VINO rosso") o <target> <indizio> (es. "mal di TESTA"). Entrambi vanno bene purché l'espressione sia davvero usata in italiano.
+5. Varia il tipo di target: aggettivi, sostantivi, verbi all'infinito. Varia la lunghezza (3-12 lettere).
+6. NON ripetere target già usati: ROSSO, NERO, BIANCO, FORTE, APERTO, DOLCE, PIENO, ORO, FERRO, FUOCO, ACQUA, VENTO, LUCE, TESTA, PANE, TEMPO, VITA, MANO, CUORE, STRADA, PORTA, CARTA, OCCHIO, AMORE, GIOCO, SOGNO, NOTTE, GIORNO, CASA, FESTA, VERDE, ROSA, LUNA, SOLE, STELLA, MARE, FOLLE, LIBERO, DURO, ALTO, BASSO, LUNGO, CORTO, VECCHIO, NUOVO, PRIMO, ULTIMO, GRANDE, PICCOLO, COLPO, CAMPO, LINEA, PUNTO, FINE, SALTO, GIRO, FILO, CORSA, NUMERO, ARIA, FINESTRA, CHIAVE, LETTO, FRATELLO, PRIMA, ETÀ.
+7. Niente nomi propri, niente marchi, niente termini volgari.
+8. Rispondi SOLO con il JSON array, senza blocchi markdown, senza testo prima o dopo.
+
+ESEMPI CORRETTI:
+[
+  {"target": "FOLLE", "clues": ["AMORE","CORSA","VELOCITÀ","IDEA","SPESE"]},
+  {"target": "ROSSO", "clues": ["VINO","POMODORO","SEMAFORO","PESCE","MARE"]},
+  {"target": "CHIAVE", "clues": ["SERRATURA","INGLESE","VIOLINO","MAESTRA","GIRO"]}
+]
+
+Varia il tema: natura, sport, cucina, casa, lavoro, emozioni, animali, oggetti, verbi, aggettivi. Dai priorità a espressioni che un italiano madrelingua riconoscerebbe immediatamente.
+
+Rispondi ora SOLO con il JSON array di 30 enigmi.`;
+
+function openAIPrompt() {
+  document.getElementById("aiPromptText").value = AI_PROMPT;
+  document.getElementById("aiModalMsg").textContent = "";
+  document.getElementById("aiModal").style.display = "flex";
+}
+function closeAIPrompt() {
+  document.getElementById("aiModal").style.display = "none";
+}
+function copyAIPrompt() {
+  const txt = document.getElementById("aiPromptText");
+  const msg = document.getElementById("aiModalMsg");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(AI_PROMPT).then(
+      () => { msg.textContent = "Copiato! Incollalo nella tua AI."; msg.className = "msg success"; },
+      () => { fallbackCopy(txt, msg); }
+    );
+  } else {
+    fallbackCopy(txt, msg);
+  }
+}
+function fallbackCopy(txt, msg) {
+  try {
+    txt.select();
+    txt.setSelectionRange(0, 999999);
+    const ok = document.execCommand("copy");
+    msg.textContent = ok ? "Copiato!" : "Seleziona il testo manualmente e copialo.";
+    msg.className = ok ? "msg success" : "msg error";
+  } catch (e) {
+    msg.textContent = "Seleziona manualmente e copia.";
+    msg.className = "msg error";
+  }
+}
+
 if ("serviceWorker" in navigator && location.protocol === "https:") {
   const swCode = `
-    const CACHE = "ghigliottina-v1";
+    const CACHE = "paroliere-v1";
     self.addEventListener("install", e => {
       self.skipWaiting();
       e.waitUntil(caches.open(CACHE).then(c => c.add(location.href.replace(/sw\\.js.*/, ""))));
@@ -1033,8 +929,9 @@ if ("serviceWorker" in navigator && location.protocol === "https:") {
   } catch (e) {}
 }
 
-// ============== INIT ==============
+loadSettings();
 loadCustom();
+renderDifficulty();
 </script>
 </body>
 </html>
