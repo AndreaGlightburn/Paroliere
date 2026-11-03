@@ -1,14 +1,22 @@
-# Paroliere · Ghigliottina Mente
+# Paroliere
 
 PWA single-HTML per allenare la mente con un gioco di parole stile Ghigliottina de *L'Eredità*.
 
-**Live demo**: https://andreaglightburn.github.io/Paroliere/
+**Live demo**: https://andreaglightburn.github.io/Paroliere/ (dopo attivazione Pages)
 
 ## Modalità di gioco
 
 - **Classica** — 5 indizi, scrivi la parola che li unisce. Montepremi 100.000 € che si dimezza ad ogni errore o indizio nascosto (jolly "Dimezza").
-- **Scelta multipla** — 5 indizi + 6 opzioni. 100 punti, −20 ad ogni sbaglio, max 3 errori.
+- **Scelta multipla** — 5 indizi + opzioni fra cui scegliere (4/6/8 configurabili). Punteggio 100, −20 ad ogni sbaglio.
 - **A trattini** — parola nascosta come `_ _ _ _ _`. A ogni errore una lettera appare in posizione casuale, ma il punteggio dimezza.
+
+## Difficoltà configurabile (home)
+
+- **Lunghezza parola**: Facile (3-5 lettere) · Media (6-8) · Difficile (9+) · Qualsiasi
+- **Tentativi** (modalità A trattini): 3 · 5 · 7 · Auto (70% della lunghezza)
+- **Opzioni** (modalità Scelta multipla): 4 · 6 · 8
+
+Le preferenze restano salvate in localStorage.
 
 ## Caratteristiche
 
@@ -16,7 +24,8 @@ PWA single-HTML per allenare la mente con un gioco di parole stile Ghigliottina 
 - 🌙 Dark mode automatico in base al tema di sistema
 - 💾 Funziona completamente offline (service worker inline)
 - 📊 Statistiche personali in localStorage (partite, vittorie, record per modalità)
-- ➕ Enigmi personalizzati caricabili come JSON
+- ➕ Enigmi personalizzati caricabili da file JSON o paste
+- 🤖 Prompt pronto per Claude/ChatGPT/Gemini per generare nuovi enigmi
 - 🎯 65 enigmi italiani pre-costruiti pescati a caso
 
 ## Deploy
@@ -32,13 +41,24 @@ PWA single-HTML per allenare la mente con un gioco di parole stile Ghigliottina 
 
 Dopo 1-2 minuti è live su https://andreaglightburn.github.io/Paroliere/
 
+(Nota: GitHub Pages gratuito richiede che il repo sia **public**.)
+
 ### Hosting proprio (Aruba, ecc.)
 
 Copia `index.html` nella webroot. Niente da installare.
 
-## Formato enigmi personalizzati
+## Generare nuovi enigmi con AI
 
-Da **Impostazioni → Enigmi personalizzati**, incolla un array JSON:
+Dalla schermata **Impostazioni → Genera con AI** copi un prompt già pronto. Lo incolli in Claude, ChatGPT, Gemini o altra AI — ti restituisce un array JSON di 30 enigmi che carichi con il pulsante **📁 Carica file JSON**.
+
+Il prompt è progettato per produrre output nel formato esatto, senza blocchi markdown, con le regole del gioco:
+- Target in maiuscolo, singola parola
+- 5 indizi in maiuscolo, ciascuno una sola parola
+- Collocazioni italiane comuni e riconoscibili
+- No ripetizioni dei target già presenti
+- No nomi propri o marchi
+
+## Formato enigmi
 
 ```json
 [
@@ -49,16 +69,12 @@ Da **Impostazioni → Enigmi personalizzati**, incolla un array JSON:
 ]
 ```
 
-Regole:
-- `target`: la parola da indovinare (maiuscola, senza spazi vinci anche con minuscolo o con accenti diversi)
-- `clues`: esattamente 5 indizi, ciascuno collegabile al target tramite una collocazione, un modo di dire o un composto comune in italiano
-
-Il pulsante **Esporta tutti** scarica un JSON con base + personalizzati, utile per condividere raccolte tra più dispositivi o utenti.
+Il pulsante **Esporta tutti** scarica un JSON con base + personalizzati, utile per condividere raccolte tra più dispositivi o volontari.
 
 ## Roadmap
 
-- [ ] Backend AI opzionale (iz2oii.eu) per generazione procedurale di enigmi inediti
-- [ ] Modalità "Sfida giornaliera" (stesso enigma per tutti nel giorno, basato su seed data)
+- [ ] Backend AI opzionale (iz2oii.eu) per generazione procedurale on-demand
+- [ ] Modalità "Sfida giornaliera" (stesso enigma per tutti nel giorno, seed data)
 - [ ] Varianti: catena di parole, anagrammi tematici, memoria breve
 - [ ] Database collocazioni italiane precalcolate (corpus Paisà / itWaC)
 
