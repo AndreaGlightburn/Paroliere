@@ -192,7 +192,7 @@ textarea.custom-input { width:100%; min-height:90px; padding:10px; font-family:u
       <button class="btn secondary full" onclick="clearCustom()" style="margin-top:4px">Rimuovi personalizzati</button>
     </div>
     <div class="setting-item" style="font-size:12px;color:var(--text-muted);text-align:center">
-      Paroliere · PWA offline · v1.3
+      Paroliere · PWA offline · v1.4
     </div>
   </section>
 
@@ -437,12 +437,12 @@ const BASE_PUZZLES = [
 ];
 
 const SETTINGS_KEY = "paroliere.settings.v2";
-const DEFAULT_SETTINGS = { length: "medium", attempts: "5", options: "6", preset: "intermediate" };
+const DEFAULT_SETTINGS = { length: "medium", attempts: "5", options: "6", startHidden: 0, preset: "intermediate" };
 const PRESETS = {
-  beginner:    { length: "easy",   attempts: "7", options: "4", label: "Facile",    desc: "Parole corte, molti tentativi" },
-  intermediate:{ length: "medium", attempts: "5", options: "6", label: "Media",     desc: "Parole medie, tentativi normali" },
-  advanced:    { length: "hard",   attempts: "3", options: "8", label: "Difficile", desc: "Parole lunghe, pochi tentativi" },
-  expert:      { length: "any",    attempts: "3", options: "8", label: "Esperto",   desc: "Tutte le parole, difficoltà max" }
+  beginner:    { length: "easy",     attempts: "7", options: "4", startHidden: 0, label: "Facile",    desc: "Parole 3-5, 7 tentativi" },
+  intermediate:{ length: "medium",   attempts: "5", options: "6", startHidden: 0, label: "Media",     desc: "Parole 6-8, 5 tentativi" },
+  advanced:    { length: "hard",     attempts: "2", options: "8", startHidden: 1, label: "Difficile", desc: "Parole 9+, 2 tentativi, 1 indizio nascosto" },
+  expert:      { length: "verylong", attempts: "1", options: "8", startHidden: 2, label: "Esperto",   desc: "Parole 10+, 1 tentativo, 2 indizi nascosti" }
 };
 let settings = { ...DEFAULT_SETTINGS };
 
@@ -472,6 +472,7 @@ function applyPreset(name) {
   settings.length = p.length;
   settings.attempts = p.attempts;
   settings.options = p.options;
+  settings.startHidden = p.startHidden || 0;
   settings.preset = name;
   document.getElementById("difficultyPanel").style.display = "none";
   saveSettings();
@@ -495,9 +496,12 @@ const DIFF_OPTIONS = {
     { val: "easy", label: "Facile", sub: "3-5" },
     { val: "medium", label: "Media", sub: "6-8" },
     { val: "hard", label: "Difficile", sub: "9+" },
+    { val: "verylong", label: "Max", sub: "10+" },
     { val: "any", label: "Qualsiasi", sub: "" }
   ],
   attempts: [
+    { val: "1", label: "1" },
+    { val: "2", label: "2" },
     { val: "3", label: "3" },
     { val: "5", label: "5" },
     { val: "7", label: "7" },
@@ -530,7 +534,7 @@ function renderDifficulty() {
 
 const MODE_NAMES = { classica: "Classica", scelta: "Scelta multipla", trattini: "A trattini" };
 const MODE_START_SCORE = { classica: 100000, scelta: 100, trattini: 1000 };
-const LENGTH_RANGES = { easy: [3,5], medium: [6,8], hard: [9,99], any: [1,99] };
+const LENGTH_RANGES = { easy: [3,5], medium: [6,8], hard: [9,99], verylong: [10,99], any: [1,99] };
 
 let state = {};
 let CUSTOM = [];
@@ -582,7 +586,17 @@ function startGame(mode) {
   const pool = filteredPool();
   if (!pool.length) { alert("Nessun enigma disponibile per questa difficoltà."); return; }
   const puzzle = pool[Math.floor(Math.random() * pool.length)];
-  state = { mode, puzzle, score: MODE_START_SCORE[mode], errors: 0, revealed: [], hiddenClues: [], ended: false, inProgress: true };
+  // Nascondi N indizi iniziali in Classica (preset Difficile/Esperto)
+  let hiddenInit = [];
+  if (mode === "classica" && (settings.startHidden || 0) > 0) {
+    const idx = [0,1,2,3,4];
+    for (let i = idx.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [idx[i], idx[j]] = [idx[j], idx[i]];
+    }
+    hiddenInit = idx.slice(0, Math.min(settings.startHidden, 3));
+  }
+  state = { mode, puzzle, score: MODE_START_SCORE[mode], errors: 0, revealed: [], hiddenClues: hiddenInit, ended: false, inProgress: true };
   document.getElementById("modeLabel").textContent = MODE_NAMES[mode];
   updateScore();
   renderGame();
@@ -930,7 +944,7 @@ function fallbackCopy(txt, msg) {
 
 if ("serviceWorker" in navigator && location.protocol === "https:") {
   const swCode = `
-    const CACHE = "paroliere-v3";
+    const CACHE = "paroliere-v4";
     self.addEventListener("install", e => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then(c => c.add(location.href.replace(/sw\\.js.*/, "")))); });
     self.addEventListener("activate", e => e.waitUntil(clients.claim()));
     self.addEventListener("fetch", e => {
